@@ -1,0 +1,59 @@
+@media (max-width: 531px) {
+
+    h1{
+        font-size: 27px;
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .my-video{
+        height: 197px;
+        width: 350px;
+    }
+
+    #timeLine {
+        width: 350px;
+        margin: 0;
+    }
+
+    .controls-con1{
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 350px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .controls-con2{
+        display: flex;
+        max-width: 350px;
+        align-items: center;
+        justify-content:space-around;
+       }
+}
+
+@media (max-width: 379px){
+    h1{
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 26px;
+    }
+
+    .my-video{
+        height: 177px;
+        width: 330px;
+    }
+
+    #timeLine {
+        width: 330px;
+    }
+
+    .controls-con1{
+        max-width: 330px;
+    }
+
+    .controls-con2{
+        max-width: 330px;
+       }
+}
+

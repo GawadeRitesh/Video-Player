@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+    <h1>Video Streaming With Javascript</h1>
+
+    <div class="container">
+        <div class="video-con" >
+            <label  class="my-video-label" for="check">
+                <video width="500" height="280" id="myVideo" class="my-video"> 
+                    <source src="video.mp4">
+                    There is no video
+                </video>
+            </label>
+    
+            <input type="range" id="timeLine" class="progress-bar" value="0" min="0" step="0.01">
+
+            <div class="controls-con1">
+                <div class="box1 box"> <input type="checkbox"  id="check" style="display: none;">
+                    <label id="playPauseBtn" class="toggle-btn" for="check"></label>
+    
+                    <div class="video-time"><span id="current-time">00:00</span>/<span id="duration"></span></div>
+                </div>
+            
+                <div class="box2 box">
+                    <input type="checkbox" id="mute" style="display: none;">
+                    <label class="volume-img" for="mute"></label>
+
+                    <input type="range" id="volume" class="progress-bar" value="0" min="0" max="1" step="0.1">
+                
+                    <button id="volumeUp" class="volume-control">+</button>
+                
+                    <button id="volumeDown" class="volume-control">-</button>
+                </div>
+            
+                <div class="box3 box">
+                    <button id="moveBackward" class="video-control-move"></button>
+                    <button id="moveForword" class="video-control-move"></button>
+                </div>
+
+                <div class="box4 box">
+                    <button id="fullScreen" ></button>
+
+                    <button class="menu"></button>
+                </div>
+            </div>
+
+            <div class="menu-div">
+                <div class="controls-con2">
+                    <div>
+                        <label class="speed">Speed:</label>
+                        <select id="videoSpeed">
+                            <option value="0.5">0.5x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="1.25" >1.25x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2">2x</option>
+                        </select>
+                    </div>
+                
+                    <input type="checkbox" id="loopVideo" style="display: none;">
+                    <label for="loopVideo" class="loop-video-lable"><img src="./images/refresh.png" alt=""></label>
+                
+                    <a href="video.mp4" download="video.mp4" class="download"><img src="./images/direct-download.png" alt=""></a>
+    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+   
+
+    <script src="script.js"></script>
+</body>
+</html>
