@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
-    <h1>Video Streaming With Javascript</h1>
+    <h1>Video Streaming Using Javascript</h1>
 
     <div class="container">
         <div class="video-con" >
             <label  class="my-video-label" for="check">
                 <video width="500" height="280" id="myVideo" class="my-video"> 
-                    <source src="video.mp4">
+                    <source src="">
                     There is no video
                 </video>
             </label>
@@ -27,10 +27,15 @@
     
                     <div class="video-time"><span id="current-time">00:00</span>/<span id="duration"></span></div>
                 </div>
+
+                <div class="box5 box">
+                    <label id="playBack" for="check"><img class="play-back-next" src="./images/play-back.png"></label>
+                    <label id="playNext" for="check"><img class="play-back-next" src="./images/play-next.png"></label>
+                </div>
             
                 <div class="box2 box">
                     <input type="checkbox" id="mute" style="display: none;">
-                    <label class="volume-img" for="mute"></label>
+                    <label class="volume-img control" for="mute"></label>
 
                     <input type="range" id="volume" class="progress-bar" value="0" min="0" max="1" step="0.1">
                 
@@ -40,8 +45,8 @@
                 </div>
             
                 <div class="box3 box">
-                    <button id="moveBackward" class="video-control-move"></button>
-                    <button id="moveForword" class="video-control-move"></button>
+                    <button id="moveBackward" class="video-control-move control"></button>
+                    <button id="moveForword" class="video-control-move control"></button>
                 </div>
 
                 <div class="box4 box">
@@ -67,7 +72,7 @@
                     <input type="checkbox" id="loopVideo" style="display: none;">
                     <label for="loopVideo" class="loop-video-lable"><img src="./images/refresh.png" alt=""></label>
                 
-                    <a href="video.mp4" download="video.mp4" class="download"><img src="./images/direct-download.png" alt=""></a>
+                    <a href="" download="" class="download"><img src="./images/direct-download.png" alt=""></a>
     
                 </div>
             </div>

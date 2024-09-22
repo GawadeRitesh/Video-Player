@@ -3,6 +3,8 @@ const playPauseBtn = document.querySelector('#playPauseBtn');
 const isChecked = document.querySelector('#check');
 const volumeUp = document.querySelector('#volumeUp');
 const volume = document.querySelector('#volume');
+const playNext = document.querySelector('#playNext');
+const playBack = document.querySelector('#playBack');
 const volumeDown = document.querySelector('#volumeDown');
 const forward = document.querySelector('#moveForword');
 const backward = document.querySelector('#moveBackward');
@@ -18,6 +20,25 @@ const videoLable = document.querySelector('.my-video-label');
 const loopLabel = document.querySelector('.loop-video-lable');
 const menu = document.querySelector('.menu');
 const menuDiv = document.querySelector('.menu-div');
+const downloadBtn = document.querySelector('.download');
+
+
+let currentVideo = 0;
+const videos = [
+    'video1.mp4',
+    'video2.mp4',
+    'video3.mp4',
+    'video4.mp4',
+    'video5.mp4'
+];
+
+loadVideo(currentVideo);
+
+function loadVideo(index){ 
+    video.src = `./videos/${videos[index]}`;
+    updateTime();
+    speedShift();
+}
 
 // *** Pause and Play ***
 function togglePlayPause(){
@@ -39,6 +60,15 @@ function toggleVolumeImage(){
     }else{
         volumeImage.style.backgroundImage = 'url("./images/mute.png")';
     }
+}
+
+function toggleMute(){
+    if(!video.muted){
+        volumeImage.style.backgroundImage = 'url("./images/volume-up.png")';
+    }else{
+        volumeImage.style.backgroundImage = 'url("./images/mute.png")';
+    }
+
 }
 
 function increaseVolume(){
@@ -66,13 +96,29 @@ function decreaseVolume(){
     updateSlider(volume);
 }
 
-function toggleMute(){
-    if(!video.muted){
-        volumeImage.style.backgroundImage = 'url("./images/volume-up.png")';
+// ** Playlist Navigation **
+function nextVideo(){
+    if(currentVideo === videos.length-1){
+        currentVideo = 0;
+        loadVideo(currentVideo);
     }else{
-        volumeImage.style.backgroundImage = 'url("./images/mute.png")';
+        currentVideo++;
+        loadVideo(currentVideo);
     }
+     isChecked.checked = false;
+     togglePlayPause();
+}
 
+function previousVideo(){
+    if (currentVideo === 0){
+        currentVideo = videos.length-1;
+        loadVideo(currentVideo);
+    }else{
+        currentVideo--;
+        loadVideo(currentVideo);
+    }
+    isChecked.checked = false;
+    togglePlayPause();
 }
 
 // *** Loop ***
@@ -93,8 +139,10 @@ function formatTime(seconds){
 
 function updateTime(){
     const currentTime = video.currentTime;
-    const duration = video.duration;
-
+    let duration = video.duration;
+    if(isNaN(duration)){
+        duration = 0;
+    }
     videoCurrentTime.textContent =`${formatTime(currentTime)}`
     videoDuration.textContent = `${formatTime(duration)}`
 }
@@ -115,24 +163,37 @@ function move(direction){
     }
 }
 
+// *** FlowSpeed ***
+function speedShift(){
+    video.playbackRate = parseFloat(videoSpeed.value);
+}
+
+// *** Download ***
+function downloadVideo(){
+    video.src = `./videos/${videos[currentVideo]}`;
+    downloadBtn.href = video.src;
+    downloadBtn.download = video.src;
+}
+
 
 // **** EventListener ****
 
 // *** Pause and Play ***
-videoLable.addEventListener('click', () => {
-    togglePlayPause();
-});
+videoLable.addEventListener('click', togglePlayPause);
 
-playPauseBtn.addEventListener('click', () => {
-    togglePlayPause();
-});
+playPauseBtn.addEventListener('click', togglePlayPause);
+
+
+// ** Playlist Navigation **
+playNext.addEventListener('click', nextVideo);
+
+playBack.addEventListener('click', previousVideo);
 
 
 // ** Full Screen **
 fullScreen.addEventListener('click', () => {
     video.requestFullscreen();
 });
-
 
 // *** Volume control ***
 volume.value = video.volume;
@@ -149,14 +210,9 @@ mute.addEventListener('change', () => {
     toggleMute();
 });
 
-volumeUp.addEventListener('click', () => {
-    increaseVolume();
-});
+volumeUp.addEventListener('click', increaseVolume);
 
-
-volumeDown.addEventListener('click', () => {
-    decreaseVolume();
-});
+volumeDown.addEventListener('click', decreaseVolume);
 
 
 // *** Loop ***
@@ -168,9 +224,7 @@ loopVideo.addEventListener('change', () => {
 
 
 // *** Video speed ***
-videoSpeed.addEventListener('change', () => {
-    video.playbackRate = parseFloat(videoSpeed.value);
-});
+videoSpeed.addEventListener('change', speedShift);
 
 
 // *** Video TimeLine ***
@@ -179,6 +233,10 @@ video.addEventListener('timeupdate', () => {
     timeLine.value = video.currentTime;
     updateTime();
     updateSlider(timeLine);
+      if(video.currentTime == video.duration){
+        nextVideo();
+        isChecked.checked = true;
+      }
 });
 
 timeLine.addEventListener('input', () => {
@@ -205,3 +263,6 @@ menu.addEventListener('click', () => {
         display = false;
     }
 });
+
+// *** Download ***
+downloadBtn.addEventListener('click', downloadVideo)
